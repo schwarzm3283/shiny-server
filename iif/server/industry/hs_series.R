@@ -1,4 +1,4 @@
-#####################################################################################SI DATA####################################################################
+#####################################################################################HS DATA####################################################################
 
 ##############reactive variables to get codes from text######################
 
@@ -47,12 +47,16 @@ output$hs_1 <- renderUI({
 
 output$hs_2 <- renderUI({
   
+  hs.series$division_code <- str_pad(hs.series$division_code, 2, side = "left", pad = "0")
+  hs.series$industry_code <- str_pad(hs.series$industry_code, 4, side = "left", pad = "0")
+  
+  
   industry_division_code <- hs.series %>% 
     filter(division_code %in% hs_division_selected()) %>% 
     select(industry_code)
   
   industry_division <- hs.industry %>% 
-    filter(industry_code %in% industry_division_code$industry_code) %>% 
+    filter(industry_code %in% str_pad(industry_division_code$industry_code, 4, side = "left", pad = "0")) %>% 
     select(industry_name)
   
   selectInput("hs_industry", "Industry",
@@ -61,6 +65,8 @@ output$hs_2 <- renderUI({
 })
 
 output$hs_3 <- renderUI({
+  hs.series$division_code <- str_pad(hs.series$division_code, 2, side = "left", pad = "0")
+  hs.series$industry_code <- str_pad(hs.series$industry_code, 4, side = "left", pad = "0")
   
   casetype_industry_code <- hs.series %>% 
     filter(industry_code %in% hs_industry_selected() & division_code %in% hs_division_selected()) %>% 
@@ -75,8 +81,10 @@ output$hs_3 <- renderUI({
               selected = input$hs_casetype)
 })
 
-
 output$hs_4 <- renderUI({
+  
+  hs.series$division_code <- str_pad(hs.series$division_code, 2, side = "left", pad = "0")
+  hs.series$industry_code <- str_pad(hs.series$industry_code, 4, side = "left", pad = "0")
   
   datatype_casetype_code <- hs.series %>% 
     filter(case_type_code %in% hs_casetype_selected() & industry_code %in% hs_industry_selected() & division_code %in% hs_division_selected()) %>% 
@@ -117,7 +125,7 @@ observeEvent(input$hs_submit, {
         hs_series_current_id <- paste("HSU", hs_division_selected(), hs_industry_selected(), hs_datatype_selected(), hs_casetype_selected(), sep = "")
         
         
-        bls_raw <<- bls_api(hs_series_current_id, registrationKey = "c739296b855144a696b037d306a18720", startyear = "1970", endyear = "1989") %>% 
+        bls_raw <- bls_api(hs_series_current_id, registrationKey = "c739296b855144a696b037d306a18720", startyear = "1970", endyear = "1989") %>% 
           select(seriesID, year, value)
         
         widths =  c(3,2,4,1)
