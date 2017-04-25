@@ -49,10 +49,15 @@ output$sh_1 <- renderUI({
 observeEvent(input$sh_division, {
   output$sh_2 <- renderUI({
     
-    sh_division_selected <- sh_division_selected()
+    sh.series$division_code <- str_pad(sh.series$division_code, 2, side = "left", pad = "0")
+    sh.series$industry_code <- str_pad(sh.series$industry_code, 4, side = "left", pad = "0")
     
-    industry_division_code <- dbGetQuery(pool, paste("SELECT distinct industry_code FROM sh_alldata WHERE division_code =",
-                                                     paste(sh_division_selected),sep = ""))
+    #industry_division_code <- dbGetQuery(pool, paste("SELECT distinct industry_code FROM sh_alldata WHERE division_code =",
+    #                                                 paste(sh_division_selected),sep = ""))
+    
+    industry_division_code <- sh.series %>% 
+      filter(division_code %in% sh_division_selected()) %>% 
+      select(industry_code)
     
     
     industry_division <- sh.industry %>% 
@@ -71,6 +76,9 @@ observeEvent(input$sh_division, {
 
 output$sh_3 <- renderUI({
   
+  sh.series$division_code <- str_pad(sh.series$division_code, 2, side = "left", pad = "0")
+  sh.series$industry_code <- str_pad(sh.series$industry_code, 4, side = "left", pad = "0")
+  
   casetype_industry_code <- sh.series %>% 
     filter(industry_code %in% sh_industry_selected() & division_code %in% sh_division_selected()) %>% 
     select(case_type_code)
@@ -86,6 +94,9 @@ output$sh_3 <- renderUI({
 
 
 output$sh_4 <- renderUI({
+  
+  sh.series$division_code <- str_pad(sh.series$division_code, 2, side = "left", pad = "0")
+  sh.series$industry_code <- str_pad(sh.series$industry_code, 4, side = "left", pad = "0")
   
   datatype_casetype_code <- sh.series %>% 
     filter(case_type_code %in% sh_casetype_selected() & industry_code %in% sh_industry_selected() & division_code %in% sh_division_selected()) %>% 
