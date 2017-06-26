@@ -1,11 +1,6 @@
 # Michael Schwarz
 # Michael 08 2017
 
-# This is the server portion of a shiny app that returns IIF lab stat tdata
-
-# source("utils.R")
-#import lookup tables data
-
 
 shinyServer(function(input, output, session) {
  
@@ -21,7 +16,6 @@ shinyServer(function(input, output, session) {
   })
   isolate({updateTabItems(session, "tabs", "info")})
   #include server source files
-  source(file.path("server", "datatables.R"),  local = TRUE)$value
-  
+  source(file.path("server", "datatables_srv.R"),  local = TRUE)$value
   
 })

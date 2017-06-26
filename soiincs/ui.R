@@ -22,8 +22,8 @@ dashboardPage(
     busyIndicator("Loading Data",wait = 0),
     HTML("<link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>"),
     
-    tabItems(source(file.path("ui", "about.R"),  local = TRUE)$value,
-             source(file.path("ui", "datatables.R"),  local = TRUE)$value)
+    tabItems(source(file.path("ui", "about_ui.R"),  local = TRUE)$value,
+             source(file.path("ui", "datatables_ui.R"),  local = TRUE)$value)
   )
 )
 
