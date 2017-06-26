@@ -1,6 +1,4 @@
-####Industry Section######
-
-##################timeframe input####################
+#####datatable filters
 
 output$filterone <- renderUI({
   selectizeInput("filterone", "This is filter one",
