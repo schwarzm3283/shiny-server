@@ -5,8 +5,8 @@ tabItem(tabName = "datatables",
                           column(
                             12,
                             box(
-                              title = "Combined Filters",
-                              status = "primary",
+                              title = "Global Filters",
+                              status = "danger",
                               busyIndicator("Loading Data", wait = 500),
                               solidHeader = TRUE,
                               width = NULL,
@@ -33,7 +33,7 @@ tabItem(tabName = "datatables",
                             6,
                             box(
                               title = "SOII Filters",
-                              status = "primary",
+                              status = "info",
                               busyIndicator("Loading Data", wait = 500),
                               solidHeader = TRUE,
                               width = NULL,
@@ -50,14 +50,15 @@ tabItem(tabName = "datatables",
                                        }
                                        ")
                                 ))
-                              )
+                              ),
+                              div(style = 'overflow-x: scroll', DT::dataTableOutput('soii_data_table'))
                             )
                           ),
                           column(
                             6,
                             box(
                               title = "NCS Filters",
-                              status = "primary",
+                              status = "info",
                               busyIndicator("Loading Data", wait = 500),
                               solidHeader = TRUE,
                               width = NULL,
@@ -74,7 +75,8 @@ tabItem(tabName = "datatables",
                                        }
                                        ")
                                 ))
-                              )
+                              ), 
+                              div(style = 'overflow-x: scroll', DT::dataTableOutput('soii_data_tabletest'))
                             )
                           )
                         ))))

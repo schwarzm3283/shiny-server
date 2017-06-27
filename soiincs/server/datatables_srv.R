@@ -70,7 +70,8 @@ output$filter_ownership <- renderUI({
                  selected = "Please select option")
 })
 
-
+output$soii_data_table <- generate_datatable(cs_alldata, "SOII DATA")
+output$soii_data_tabletest <- generate_datatable(test, "NCS DATA")
 
 
 

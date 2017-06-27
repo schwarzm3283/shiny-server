@@ -3,7 +3,8 @@
 
 
 shinyServer(function(input, output, session) {
- 
+  load("data/cs_alldata.Rda")
+ test <- cs_alldata
   #---------------Create sidebar menu
   
   output$menu <- renderMenu({
