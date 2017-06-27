@@ -1,6 +1,3 @@
-
-
-
 tabItem(tabName = "datatables",
         busyIndicator("Loading Data", wait = 0),
         fluidRow(column(12,
